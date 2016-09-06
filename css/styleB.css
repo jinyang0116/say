@@ -1,0 +1,90 @@
+.photo{
+
+    width: 100%;
+    height: 8rem;
+    position: relative;
+    overflow: hidden;
+    
+}
+@media(min-width: 768px){
+    html{
+        font-size: 30px;
+    }
+}
+@media(min-width: 992px){
+    html{
+        font-size: 40px;
+    }
+}
+@media(min-width: 1200px){
+    html{
+        font-size: 50px;
+    }
+}
+
+.bg-photo{
+    position: absolute;
+    left: 0px;
+    top: 0;
+    background: url("../img/p1.jpg") no-repeat;
+    -webkit-background-size: cover;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+}
+.cover,.content{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left:0;
+    top: 0;
+}
+.cover{
+    background: rgba(0,0,0,.4);
+    z-index: 1;
+}
+.content{
+    z-index: 9;
+}
+.content .title{
+    position: absolute;
+    left: 50%;
+    top: 1.9rem;
+    color: #fff;
+    font-size: 1rem;
+}
+.sign{
+    position: absolute;
+    right: -1.65rem;
+    top: .2rem;
+    width: 1.25rem;
+    height: .6rem;
+}
+.sign span{
+    width: 1.1rem;
+    height: 100%;
+    background: #79b842;
+    font-size: .5rem;
+    text-align: center;
+    line-height: .6rem;
+}
+.sign img{
+    width: .15rem;
+    height: 100%;
+}
+.headphoto{
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    position: absolute;
+    left: 50%;
+    top: 3.5rem;
+    margin-left: -.75rem;
+}
+.name{
+    color: #fff;
+    position: absolute;
+    left: 50%;
+    top: 5.5rem;
+    font-size: .6rem;
+}

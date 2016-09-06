@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <!-- 使用不同智能机的宽度 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="renderer" content="webkit">
+    <title>MissQ校花</title>
+    <!-- 标注网页的作者 -->
+    <meta name="author" content="jinyang_jane@163.com">
+    <link rel="stylesheet" href="css/bootstrap.css"/>
+    <link rel="stylesheet" media="all" href="css/base.css">
+    <link rel="stylesheet" href="css/styleU.css"/>
+    <script>
+//                ;(function(win, doc){
+//                    function change(){
+//                        doc.documentElement.style.fontSize=20*doc.documentElement.clientWidth/320+'px';
+//                    }
+//                    change();
+//
+//                    win.addEventListener('resize', change, false);
+//                })(window, document);
+//
+        window.onload=function(){
+            var oCon= document.getElementById("content"); //获取显示图片的div元素
+            var input = document.getElementById("file_input"); //获取选择图片的input元素
+            var oLi1=oCon.getElementsByTagName('li')[0];
+            var H=oLi1.offsetWidth+'px';
+
+            oLi1.style.height=H;
+            function setHeight(){
+                var aLi=oCon.getElementsByTagName('li');
+                for(var i=0;i<aLi.length;i++){
+                    aLi[i].style.height=H;
+                }
+            }
+//            function setMargin(){
+//                var aLi=oCon.getElementsByTagName('li');
+//                for(var i=0;i<aLi.length;i++){
+//                    if(i%4==3){
+//                        aLi[i].style.marginRight=0;
+//                    }
+//                }
+//            }
+            //这边是判断本浏览器是否支持这个API。
+            if(typeof FileReader==='undefined'){
+                oCon.innerHTML = "抱歉，你的浏览器不支持 FileReader";
+                input.setAttribute('disabled','disabled');
+            }else{
+                input.addEventListener('change',readFile,false); //如果支持就监听改变事件，一旦改变了就运行readFile函数。
+            }
+
+
+            function readFile(){
+                var file = this.files; //获取file对象
+                //判断file的类型是不是图片类型。
+                for(var i=0;i<file.length;i++){
+                    if(!/image\/\w+/.test(file[i].type)){
+                        alert("文件必须为图片！");
+                        return false;
+                    }
+                    var reader = new FileReader(); //声明一个FileReader实例
+                    reader.readAsDataURL(file[i]); //调用readAsDataURL方法来读取选中的图像文件
+                    //最后在onload事件中，获取到成功读取的文件内容，并以插入一个img节点的方式显示选中的图片
+                    reader.onload = function(e){
+                        var oLi=document.createElement('li');
+                        oLi.innerHTML='<div><img src="'+this.result+'" alt=""/></div>';
+                        oLi.style.height=oLi.offsetWidth+'px';
+                        oCon.insertBefore(oLi,oCon.childNodes[0]);
+                        setHeight();
+
+                    }
+                }
+
+            }
+
+
+        }
+    </script>
+</head>
+<body>
+    <div class="container" id="main">
+        <input type="text" placeholder="请在此输入标题" class="title"/>
+            <ul class="content" id="content">
+                <li class="add"><div><input accept="img/s2.png" type="file" multiple="true" id="file_input" ></div></li>
+            </ul>
+        <p class="hint">写真数量需在10到20张之间</p>
+        <p class="contant">联系方式:</p>
+        <input type="text" placeholder="手机号" class="contant-i"/>
+        <input type="text" placeholder="微信号" class="contant-i"/>
+        <p class="message">添加您的联系方式，如我们对您的高颜值感兴趣，可方便在第一时间联系您，您则有可能成为MissQ的签约女神哦~~</p>
+        <div class="next">下一步</div>
+    </div>
+
+</body>
+</html>

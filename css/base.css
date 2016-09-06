@@ -1,0 +1,41 @@
+html {
+    font-size:20px;
+}
+*{margin:0; padding:0; font-size:12px;
+    font-family: 'Î¢ÈíÑÅºÚ';}
+h1,h2,h3,h4,h5,h6{font-weight:normal;}
+a{text-decoration:none; color:#333;}
+ul,ol,dl,dd,dt,li{margin:0; padding:0; list-style:none;}
+strong{font-weight:normal;}
+i,em{font-style:normal;}
+a img{border:0;}
+img{vertical-align:top;}
+.fl{float:left;}
+.fr{float:right;}
+.clearfix:after{display:block; content:''; clear:both;}
+.clearfix{zoom:1;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

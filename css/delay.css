@@ -1,0 +1,33 @@
+@keyframes myphoto {
+    0%{transform: scale(1,1);}
+    50%{transform: scale(1.2,1.2);}
+    100%{transform: scale(1,1);}
+}
+@-webkit-keyframes myphoto /* Safari and Chrome */
+{
+    0%{-webkit-transform: scale(1,1);}
+    50%{-webkit-transform: scale(1.2,1.2);}
+    100%{-webkit-transform: scale(1,1);}
+}
+.delay0{
+    animation: myphoto infinite 16s;
+    -webkit-animation: myphoto infinite 16s;
+}
+.delay1{
+    animation: myphoto infinite 16s;
+    -webkit-animation: myphoto infinite 16s;
+    animation-delay: .5s;
+    -webkit-animation-delay:.5s;
+}
+.delay2{
+    animation: myphoto infinite 16s;
+    -webkit-animation: myphoto infinite 16s;
+    animation-delay: 1s;
+    -webkit-animation-delay:1s;
+}
+.delay3{
+    animation: myphoto infinite 16s;
+    -webkit-animation: myphoto infinite 16s;
+    animation-delay: 1.5s;
+    -webkit-animation-delay:1.5s;
+}

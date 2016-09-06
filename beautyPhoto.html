@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <!-- 使用不同智能机的宽度 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="renderer" content="webkit">
+    <title>MissQ校花</title>
+    <!-- 标注网页的作者 -->
+    <meta name="author" content="jinyang_jane@163.com">
+    <link rel="stylesheet" href="css/bootstrap.css"/>
+    <link rel="stylesheet" media="all" href="css/base.css">
+    <link rel="stylesheet" media="all" href="css/styleB.css">
+    <link rel="stylesheet" media="all" href="css/delay.css">
+    <script src="js/ajax.js"></script>
+    <script>
+        function create5(c) {
+            var oMain=document.getElementById('main');
+            ajax({
+                type: 'GET',
+                url: 'json/more.json',
+                dataType: 'json',
+                success:function(str){
+                    //传回数据创建元素
+                    var counter = c;
+                    // 每页展示5个
+                    var num = 5;
+                    var pageStart = 0,pageEnd = 0;
+                    var json=eval('('+str+')');
+                    pageEnd = num * counter;
+                    pageStart = pageEnd - num;
+                    if(pageStart <= json.lists.length){
+                        for (var i = pageStart; i < pageEnd; i++) {
+                            var oDiv = document.createElement('div');
+                            oDiv.innerHTML = '<div class="bg-photo"/></div>\
+                        <div class="cover"></div>\
+                        <div class="content">\
+                        <div class="title" id="title">'+json.lists[i].title+'\
+                        <div class="sign">\
+                        <span class="fl">'+json.lists[i].mark+'</span><img src="'+json.lists[i].pic+'" alt="" class="fl"/>\
+                </div>\
+                </div>\
+                <img src="'+json.lists[i].headp+'" alt="" class="headphoto"/><br>\
+                        <span class="name" id="name">'+json.lists[i].name+'</span>\
+                        </div>';
+                            oDiv.className='photo';
+                            oMain.appendChild(oDiv);
+                        }
+                    }else{
+                        alert('数据加载完毕');
+                        return;
+                    }
+                    //给元素添加动态效果
+                    active();
+                    //动态设置标题等的margin-left值
+                    setMargin();
+                }
+            });
+        };
+
+        //动态设置标题等的margin-left值
+        function setMargin(){
+            var oP=document.getElementsByClassName('title');
+            var oName=document.getElementsByClassName('name');
+            var pW=oP[0].offsetWidth;
+            for(var i=0;i<oP.length;i++){
+                oP[i].style.marginLeft=-(pW/2)+'px';
+            }
+
+            var nW=oName[0].offsetWidth;
+            for(var i=0;i<oName.length;i++){
+                oName[i].style.marginLeft=-(nW/2)+'px';
+            }
+        }
+        //给元素添加动态效果
+        function active(){
+            var oBgphoto=document.getElementsByClassName('bg-photo');
+            for(var i=0;i<oBgphoto.length;i++){
+               if(i%4==0){
+                   oBgphoto[i].className='bg-photo delay0';
+                   continue;
+               }
+                if(i%4==1){
+                    oBgphoto[i].className='bg-photo delay1';
+                    continue;
+                }
+                if(i%4==2){
+                    oBgphoto[i].className='bg-photo delay2';
+                    continue;
+                }
+                if(i%4==3){
+                    oBgphoto[i].className='bg-photo delay3';
+                    continue;
+                }
+            }
+        }
+        window.onload=function(){
+            var c=1;
+            create5(c);//每页展示5个函数
+
+            //页面滚到底部再创建5个元素
+            window.onscroll = function () {
+                var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+                var clientH = document.documentElement.clientHeight;
+                var scrollBottom = scrollTop + clientH;
+                if (scrollBottom >= document.body.scrollHeight) {
+                    c++;
+                    create5(c);
+
+                }
+            };
+        }
+    </script>
+</head>
+
+<body>
+<div class="container" id="main">
+        <div class="photo">
+            <div class="bg-photo"/></div>
+            <div class="cover"></div>
+            <div class="content">
+                <div class="title" id="title">写真名称
+                    <div class="sign">
+                        <span class="fl">10P</span><img src="img/s1.png" alt="" class="fl"/>
+                    </div>
+                </div>
+                <img src="img/t1.jpg" alt="" class="headphoto"/><br>
+                <span class="name" id="name">某某某</span>
+            </div>
+        </div>
+</div>
+</body>
+</html>
