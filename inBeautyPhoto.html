@@ -21,6 +21,16 @@
 
     <script type="text/javascript" src="js/baguetteBox.min.js"></script>
     <link rel="stylesheet" href="css/inBeautyPhoto.css"/>
+    <script>
+        $(function(){
+            $('.like').on('click',function(){
+                $(this).css('background','url(img/like_tab.png) no-repeat center center ');
+            });
+            $('.share').on('click',function(){
+                //调用微信自带的分享界面
+            });
+        });
+    </script>
 </head>
 <body>
 <div class="weixin-guide-mask" style="display: none;">
@@ -118,10 +128,21 @@
             <li class="comment-list-time">一天前</li>
         </ul>
     </div>
-    <footer class="w640">
-        <input type="text" class="fl" placeholder="评论..."/>
-        <div class="share fl"></div>
-        <div class="like fl"></div>
+    <footer class="w640 container">
+        <div class="fa-inp col-xs-8 col-sm-8 col-md-8">
+            <input type="text" class="fl " placeholder="评论..."/>
+        </div>
+        <div class="fa-share   col-xs-2 col-sm-2 col-md-2">
+            <div class="row">
+                <div class="share center-block"></div>
+            </div>
+        </div>
+        <div class="fa-like center-block  col-xs-2 col-sm-2 col-md-2" >
+            <div class="row">
+                <div class="like center-block"></div>
+            </div>
+        </div>
+       
     </footer>
 
     <!--
