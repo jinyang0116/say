@@ -1,3 +1,4 @@
+#set($layout="/album/default.vm")
 <!DOCTYPE html>
 <html>
 <head lang="en">
@@ -7,22 +8,17 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <title>才艺展示</title>
-    <link rel="stylesheet" href="css/bootstrap.css"/>
-    <link rel="stylesheet" media="all" href="css/base.css">
-    <link rel="stylesheet" href="css/styleT.css"/>
-    <script src="js/jquery-1.12.3.min.js"></script>
-    <script src="js/ajax.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../css/bootstrap.css"/>
+    <link rel="stylesheet" media="all" href="../css/base.css">
+    <link rel="stylesheet" href="../css/styleT.css"/>
+    <script src="../js/jquery-1.12.3.min.js"></script>
+    <script src="../js/ajax.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
     <script>
-        function create10() {
+        function insertAlbum(json,base) {
             var oMain=document.querySelector('.main');
-            ajax({
-                type: 'GET',
-                url: 'json/video.json',
-                dataType: 'json',
-                success: function (str) {
                     var json=eval('('+str+')');
-                    for (var i = 0; i < 10; i++) {
+                    for (var i = 0; i < json,length; i++) {
                         var oDiv = document.createElement('div');
                         oDiv.innerHTML = '<div class="video-list">\
                         <img src="'+json.lists[i].pic+'" alt="" class="main-img"/>\
@@ -37,15 +33,29 @@
                         oMain.appendChild(oDiv);
                     }
                     Like();
-                }
-            });
+
         };
+
+        //ajax调用数据
+                function create10(pagenumber) {
+        			var base = $('#baseurl').val();
+        			$.getJSON(base+"/album/talentShow", { pn: pagenumber }, function (ret) {
+
+                        if (ret.data.length > 0) {
+                            insertAlbum(ret.data,base);
+                        }else{
+                        	 $(window).unbind('scroll');
+                        	 alert("没有更多数据了 ");
+                        }
+                    });
+                };
+
         //点击心形变红
         function Like(){
             var aLike=document.querySelectorAll('.like');
             for(var i=0;i<aLike.length;i++){
-                aLike[i].addEventListener('touchstart',function(){
-                    this.style.background='url("img/heart2red.png") no-repeat left center';
+                aLike[i].addEventListener('click',function(){
+                    this.style.background='url("../img/heart2red.png") no-repeat left center';
                 });
             }
         }
@@ -78,7 +88,7 @@
                 document.addEventListener('touchmove', fnMove, false);
                 document.addEventListener('touchend', fnEnd, false);
 
-//                ev.preventDefault();
+                ev.preventDefault();
             }, false);
         }
 
@@ -91,7 +101,7 @@
             create10();
 
             for(var j=0;j<aLi.length;j++){
-                aLi[j].addEventListener('click',function(){
+                aLi[j].addEventListener('touchend',function(){
                     for(var k=0;k<aLi.length;k++){
                         aLi[k].className='';
                     }
@@ -115,6 +125,7 @@
     </script>
 </head>
 <body>
+    <input id="baseurl" type="hidden" name="baseurl" value="$base" />
     <div class="container w640">
         <header>
             <ul class="title-list">
@@ -133,17 +144,7 @@
             </ul>
         </header>
         <div class="main">
-            <!--<div class="video-box col-xs-6 col-sm-4">-->
-                <!--<div class="video-list">-->
-                    <!--<img src="img/t1.jpg" alt="" class="main-img"/>-->
-                    <!--<div class="user-message clearfix">-->
-                        <!--<div class="header-page fl"><img src="img/limg/l1.jpg" alt="" /></div>-->
-                        <!--<span class="username fl">海绵宝宝啦啦啦</span>-->
-                        <!--<span class="like fl">999</span>-->
-                    <!--</div>-->
-                    <!--<p class="describe">新鲜草莓的吃法啦啦啦啦啦哈哈哈哈哈哈</p>-->
-                <!--</div>-->
-            <!--</div>-->
+
         </div>
     </div>
 </body>
